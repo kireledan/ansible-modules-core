@@ -58,8 +58,9 @@ options:
     default: null
   list:
     description:
-      - Various (non-idempotent) commands for usage with C(/usr/bin/ansible) and I(not) playbooks. See examples.
+      - Use yum utils to see C(installed), C(available), or C(updates) to packages. You can also see a list of available C(repos).
     required: false
+    choices: ["installed", "updates", "available", "repos"]
     default: null
   state:
     description:
@@ -181,6 +182,12 @@ EXAMPLES = '''
 
 - name: install the 'Gnome desktop' environment group
   yum: name="@^gnome-desktop-environment" state=present
+
+- name: list all installed packages
+  yum: list=installed
+
+- name: list updates available for installed packages
+  yum: list=updates
 '''
 
 # 64k.  Number of bytes to read at a time when manually downloading pkgs via a url
